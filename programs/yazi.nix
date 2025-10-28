@@ -182,6 +182,16 @@
 
       movementKeys = [
         {
+          on = ["g" "g"];
+          run = "arrow top";
+          desc = "Move cursor to the top";
+        }
+        {
+          on = "G";
+          run = "arrow bot";
+          desc = "Move cursor to the bottom";
+        }
+        {
           on = "h";
           run = "leave";
           desc = "Go to parent directory";
@@ -225,6 +235,11 @@
           desc = "Paste files";
         }
         {
+          on = "P";
+          run = "paste --force";
+          desc = "Paste yanked files (overwrite if the destination exists)";
+        }
+        {
           on = "d";
           run = "remove";
           desc = "Trash files";
@@ -235,7 +250,7 @@
           desc = "Delete files";
         }
         {
-          on = "a";
+          on = "c";
           run = "create";
           desc = "Create file/dir";
         }
@@ -251,16 +266,6 @@
           on = "s";
           run = "filter --smart";
           desc = "Filter files";
-        }
-        {
-          on = "/";
-          run = "find --smart";
-          desc = "Find next";
-        }
-        {
-          on = "?";
-          run = "find --previous --smart";
-          desc = "Find previous";
         }
       ];
 
@@ -323,27 +328,27 @@
             {
               on = "<C-a>";
               run = "toggle_all --state=on";
-              desc = "Select all";
+              desc = "Select all files";
+            }
+            {
+              on = "<C-r>";
+              run = "toggle_all";
+              desc = "Invert selection of all files";
             }
             {
               on = "v";
               run = "visual_mode";
-              desc = "Visual selection";
+              desc = "Enter visual mode (selection mode)";
+            }
+            {
+              on = "V";
+              run = "visual_mode --unset";
+              desc = "Enter visual mode (unset mode)";
             }
             {
               on = "o";
               run = "open --interactive";
               desc = "Open interactively";
-            }
-            {
-              on = ";";
-              run = "shell --interactive";
-              desc = "Run shell command";
-            }
-            {
-              on = ":";
-              run = "shell --block --interactive";
-              desc = "Run blocking shell";
             }
             {
               on = ".";
@@ -426,6 +431,10 @@
         {
           on = "l";
           run = "move 1";
+        }
+        {
+          on = "<C-h>";
+          run = "backspace";
         }
         {
           on = "<Backspace>";
