@@ -26,6 +26,15 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
+  boot.kernelParams = [
+    "transparent_hugepage=always" # Better memory management
+  ];
+
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches" = 524288;
+    "fs.inotify.max_user_instances" = 512;
+  };
+
   environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};
   hardware.graphics = {
     enable = true;
