@@ -16,7 +16,7 @@ in {
     shellAliases = {
       uh = "home-manager switch --flake ~/.nixos --show-trace -L -v";
       us = "sudo nixos-rebuild switch --flake ~/.nixos --show-trace -L -v";
-      uu = "sudo nix flake update ~/.nixos && sudo nixos-rebuild switch --flake ~/.nixos --show-trace -L -v && home-manager switch --flake ~/.nixos --show-trace -L -v";
+      uu = "sudo nix flake update --flake ~/.nixos && sudo nixos-rebuild switch --flake ~/.nixos --show-trace -L -v && home-manager switch --flake ~/.nixos --show-trace -L -v";
       ee = "eza -lah";
       qq = "clear";
       ff = "yazi";
