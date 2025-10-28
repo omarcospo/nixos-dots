@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -100,7 +101,19 @@
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  programs.nix-ld.enable = true;
+
   environment.systemPackages = with pkgs; [
+    # build
+    cmake
+    libtool
+    gnumake
+    ninja
+    binutils
+    bun
+    #
+    uv
+    python314
     git
     neovim
     kitty
@@ -114,6 +127,11 @@
     zoxide
     dua
   ];
+
+  environment = {
+    shellInit = ''export PATH="${pkgs.gcc}/bin:$PATH" '';
+    sessionVariables = {LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib pkgs.nodejs];};
+  };
 
   fonts = {
     enableDefaultPackages = true;

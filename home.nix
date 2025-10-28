@@ -33,7 +33,6 @@ in {
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_CACHE_HOME = "$HOME/.cache";
-    LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib];
     EDITOR = "nvim";
     VISUAL = "nvim";
     QT_SCALE_FACTOR = "1";

@@ -80,9 +80,6 @@ in {
     '';
 
     sessionVariables = {
-      PATH = "${pkgs.gcc}/bin:$PATH";
-      EDITOR = "nvim";
-      VISUAL = "nvim";
       FZF_DEFAULT_OPTS = FZF_OPTIONS;
       _ZO_FZF_OPTS = FZF_OPTIONS;
       MANWIDTH = "80";
