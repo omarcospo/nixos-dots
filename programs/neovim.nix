@@ -17,9 +17,11 @@
       gcc
       bun
       #csharp
-      dotnet-sdk
+      dotnet-sdk_9
       roslyn
       roslyn-ls
+      csharp-ls
+      csharpier
       #TYPST
       typst
       typstyle
