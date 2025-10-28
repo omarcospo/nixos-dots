@@ -135,6 +135,7 @@
     eza
     zoxide
     dua
+    networkmanagerapplet
   ];
 
   environment = {
