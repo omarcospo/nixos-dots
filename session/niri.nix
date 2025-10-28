@@ -137,14 +137,12 @@ in {
       "Mod+WheelScrollRight".action.focus-column-right = {};
       "Mod+WheelScrollLeft".action.focus-column-left = {};
       # --------------------------------
-      # "Mod+E".action.spawn = ["nc" "-U" "/run/user/1000/walker/walker.sock"];
       "Mod+G".action.toggle-overview = {};
       "Mod+E".action.spawn = ["dms" "ipc" "call" "spotlight" "toggle"];
       "Mod+Ctrl+R".action.spawn = ["nohup" "dms" "restart" ">" "/dev/null" "2>&1" "&"];
-      "Mod+T".action.spawn = "kitty";
-      "Mod+Escape".action.spawn = ["dms" "ipc" "call" "lock" "lock"];
+      "Mod+T".action.spawn = "alacritty";
       "Mod+Return".action.spawn = "firefox";
-      "Mod+Ctrl+Return".action.spawn = "qutebrowser";
+      "Mod+Escape".action.spawn = ["dms" "ipc" "call" "lock" "lock"];
       "Mod+Ctrl+Escape".action.quit = {};
       # --------------------------------
       "XF86AudioRaiseVolume" = {
