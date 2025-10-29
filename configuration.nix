@@ -82,6 +82,8 @@
   services.displayManager.gdm.enable = true;
   services.displayManager.sessionPackages = [pkgs.niri];
   security.polkit.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.gdm.enableGnomeKeyring = true;
   programs.dconf.enable = true;
   qt = {
     enable = true;
