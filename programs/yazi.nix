@@ -88,7 +88,7 @@
       opener = {
         edit = [
           {
-            run = ''nvim "$@"'';
+            run = ''nohup nvim "$@" > /dev/null 2>&1 &'';
             desc = "nvim";
             block = true;
             for = "unix";
@@ -96,21 +96,21 @@
         ];
         open = [
           {
-            run = ''xdg-open "$1"'';
+            run = ''nohup xdg-open "$1" > /dev/null 2>&1 &'';
             desc = "Open";
             for = "linux";
           }
         ];
         reveal = [
           {
-            run = ''xdg-open "$(dirname "$1")"'';
+            run = ''nohup xdg-open "$(dirname "$1")" > /dev/null 2>&1 &'';
             desc = "Reveal";
             for = "linux";
           }
         ];
         play = [
           {
-            run = ''mpv --force-window "$@"'';
+            run = ''nohup mpv --force-window "$@" > /dev/null 2>&1 &'';
             orphan = true;
             for = "unix";
           }
