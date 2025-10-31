@@ -90,7 +90,7 @@
     platformTheme = "qt5ct";
     style = "kvantum";
   };
-  programs.niri.enable = true;
+
   programs.firefox.enable = true;
   services.printing.enable = true;
   security.rtkit.enable = true;
@@ -117,7 +117,6 @@
   environment.systemPackages = with pkgs; [
     # build
     cmake
-    libtool
     gnumake
     ninja
     binutils

@@ -23,7 +23,7 @@
       inputs.dgop.follows = "dgop";
       inputs.dms-cli.follows = "dms-cli";
     };
-   emacs-overlay = {
+    emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -36,7 +36,6 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        inputs.niri-flake.overlays.niri
         inputs.emacs-overlay.overlays.default
       ];
     };

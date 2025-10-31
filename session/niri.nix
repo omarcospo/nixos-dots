@@ -52,7 +52,7 @@ in {
     };
   };
 
-  programs.niri.package = pkgs.niri-stable;
+  programs.niri.package = pkgs.niri;
   programs.niri.settings = {
     spawn-at-startup = [
       {sh = "nohup dms restart > /dev/null 2>&1 &";}
