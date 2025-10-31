@@ -137,6 +137,7 @@
     zoxide
     dua
     networkmanagerapplet
+    vdhcoapp
   ];
 
   environment = {
