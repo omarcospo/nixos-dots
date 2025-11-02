@@ -35,7 +35,6 @@ in {
           setopt PROMPT_SUBST
           PROMPT='%F{yellow}[%n]%f %~ '
 
-          source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
           source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
 
           # Initialize plugins using NixOS module system instead of manual sourcing
