@@ -142,7 +142,7 @@
 
   environment = {
     shellInit = ''export PATH="${pkgs.gcc}/bin:$PATH" '';
-    sessionVariables = {LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib pkgs.nodejs];};
+    sessionVariables = {LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib pkgs.nodejs pkgs.libtool];};
   };
 
   fonts = {
