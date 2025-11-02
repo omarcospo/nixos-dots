@@ -36,7 +36,7 @@ in {
           PROMPT='%F{yellow}[%n]%f %~ '
 
           source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
-
+          source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
           # Initialize plugins using NixOS module system instead of manual sourcing
           autopair-init
 
