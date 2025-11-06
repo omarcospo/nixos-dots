@@ -114,6 +114,8 @@
 
   programs.nix-ld.enable = true;
 
+  programs.niri.enable = true;
+
   environment.systemPackages = with pkgs; [
     # build
     cmake
@@ -138,6 +140,7 @@
     dua
     networkmanagerapplet
     vdhcoapp
+    sqlitestudio
   ];
 
   environment = {
