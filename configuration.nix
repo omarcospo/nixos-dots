@@ -141,6 +141,9 @@
     networkmanagerapplet
     vdhcoapp
     sqlitestudio
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-gnome
+    nautilus
   ];
 
   environment = {

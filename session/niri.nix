@@ -52,6 +52,7 @@ in {
     };
   };
 
+  programs.niri.enable = true;
   programs.niri.package = pkgs.niri;
   programs.niri.settings = {
     spawn-at-startup = [
