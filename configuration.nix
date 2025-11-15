@@ -118,14 +118,20 @@
 
   environment.systemPackages = with pkgs; [
     # build
-    cmake
     gnumake
     ninja
+    gcc
     binutils
+    nodejs
+    gcc
     bun
-    #
     uv
+    pkgconf
+    libpkgconf
+    # languages
     python314
+    dotnet-sdk_9
+    #
     git
     neovim
     kitty

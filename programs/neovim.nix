@@ -8,37 +8,24 @@
     enable = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
-      # BUILDING DEPENDENCIES
-      gnumake
-      ninja
-      gcc
-      binutils
-      nodejs
-      gcc
-      bun
-      #csharp
-      dotnet-sdk_9
+      # C#
       roslyn
       roslyn-ls
       csharp-ls
       csharpier
-      #TYPST
+      # TYPST
       typst
       typstyle
       tinymist
-      #NIX
+      # Nix
       alejandra
-      # LUA
+      # Lua
       lua
       stylua
       lua-language-server
-      # PYTHON
-      uv
-      python314
-      ruff
       # Markdown
       marksman
-      #AI
+      # AI
       github-copilot-cli
       copilot-language-server
       sqlite
