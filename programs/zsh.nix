@@ -44,10 +44,6 @@ in {
             nix-hash --type sha256 --base32 --flat <(curl -o - "$@") | wl-copy
           }
 
-          cd() {
-            __zoxide_z "$@" && command eza -lah --color always
-          }
-
           eza() {
             command eza -lah --color always "$@"
           }
@@ -76,6 +72,11 @@ in {
 
           # Initialize zoxide
           eval "$(zoxide init zsh --cmd cd)"  # Explicitly set cd as the command
+
+          cd() {
+            __zoxide_z "$@" && command eza -lah --color always
+          }
+
     '';
 
     sessionVariables = {
