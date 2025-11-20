@@ -146,7 +146,6 @@
     #
     git
     neovim
-    kitty
     wl-clipboard
     killall
     fzf
