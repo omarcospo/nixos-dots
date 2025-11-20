@@ -165,7 +165,7 @@
   ];
 
   environment = {
-    shellInit = ''export PATH="${pkgs.gcc}/bin:$PATH" '';
+    shellInit = ''export PATH="${pkgs.cmake}/bin:${pkgs.libpkgconf}/bin:${pkgs.pkgconf}/bin:${pkgs.gcc}/bin:${pkgs.libffi}/bin:$PATH"'';
     sessionVariables = {LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib pkgs.nodejs pkgs.libtool];};
   };
 
