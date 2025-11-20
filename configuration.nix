@@ -35,6 +35,18 @@
     "fs.inotify.max_user_instances" = 512;
   };
 
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      charger = {
+        energy_performance_preference = "performance";
+        governor = "performance";
+        scaling_min_freq = 800000;
+        scaling_max_freq = 2700000;
+      };
+    };
+  };
+
   environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};
   hardware.graphics = {
     enable = true;
