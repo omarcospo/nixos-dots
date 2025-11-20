@@ -45,7 +45,7 @@ in {
     };
   };
 
-  home.file.".local/share/background-image.jpg" = {
+  home.file.".local/share/backgrounds/background-image.jpg" = {
     source = pkgs.fetchurl {
       url = "https://codeberg.org/exorcist/wallpapers/raw/branch/master/gruvbox/futuristic-1.jpg";
       sha256 = "0sr4z4s9ay4fm37j7irc5j9q0asx7l96jnxr7dwwpisy3mvdzjik";
@@ -165,5 +165,8 @@ in {
     };
   };
 
-  programs.dankMaterialShell.enable = true;
+  programs.noctalia-shell = {
+    enable = true;
+    systemd.enable = true;
+  };
 }
