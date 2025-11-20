@@ -5,7 +5,7 @@
       window = {
         dynamic_title = true;
         decorations = "none";
-        opacity = 0.99;
+        opacity = 0.96;
         padding = {
           x = 0;
           y = 0;
@@ -64,87 +64,53 @@
       };
 
       colors = {
+        # Primary
         primary = {
-          background = "#1e1e2e";
-          foreground = "#cdd6f4";
-          dim_foreground = "#7f849c";
-          bright_foreground = "#cdd6f4";
+          background = "#1D1D20"; # libadwaita_dark_alt
+          foreground = "#FCFCFC"; # light_2
         };
 
+        # Cursor
         cursor = {
-          text = "#1e1e2e";
-          cursor = "#f5e0dc";
+          text = "#242428";
+          cursor = "#FCFCFC";
         };
 
-        vi_mode_cursor = {
-          text = "#1e1e2e";
-          cursor = "#b4befe";
-        };
-
-        search = {
-          matches = {
-            foreground = "#1e1e2e";
-            background = "#a6adc8";
-          };
-          focused_match = {
-            foreground = "#1e1e2e";
-            background = "#a6e3a1";
-          };
-        };
-
-        footer_bar = {
-          foreground = "#1e1e2e";
-          background = "#a6adc8";
-        };
-
-        hints = {
-          start = {
-            foreground = "#1e1e2e";
-            background = "#f9e2af";
-          };
-          end = {
-            foreground = "#1e1e2e";
-            background = "#a6adc8";
-          };
-        };
-
-        selection = {
-          text = "#1e1e2e";
-          background = "#f5e0dc";
-        };
-
+        # Normal colours
         normal = {
-          black = "#45475a";
-          red = "#f38ba8";
-          green = "#a6e3a1";
-          yellow = "#f9e2af";
-          blue = "#89b4fa";
-          magenta = "#f5c2e7";
-          cyan = "#94e2d5";
-          white = "#bac2de";
+          black = "#242424"; # dark_5
+          red = "#ED333B"; # red_2
+          green = "#2EC27E"; # green_4
+          yellow = "#FD983E"; # yellow_4
+          blue = "#3584E4"; # blue_3
+          magenta = "#9141AC"; # purple_3
+          cyan = "#26A1A2"; # teal_4
+          white = "#DEDDDA"; # light_4
         };
 
+        # Bright colours
         bright = {
-          black = "#585b70";
-          red = "#f38ba8";
-          green = "#a6e3a1";
-          yellow = "#f9e2af";
-          blue = "#89b4fa";
-          magenta = "#f5c2e7";
-          cyan = "#94e2d5";
-          white = "#a6adc8";
+          black = "#5E5E5E"; # dark_2
+          red = "#F66151"; # red_1
+          green = "#57E389"; # green_2
+          yellow = "#F9F06B"; # yellow_1
+          blue = "#62A0EA"; # blue_2
+          magenta = "#C061CB"; # purple_2
+          cyan = "#5BC8AF"; # teal_2
+          white = "#FFFFFF"; # light_1
         };
 
-        indexed_colors = [
-          {
-            index = 16;
-            color = "#fab387";
-          }
-          {
-            index = 17;
-            color = "#f5e0dc";
-          }
-        ];
+        # Optional dim colours (comment out if unused)
+        dim = {
+          black = "#121212"; # dark_6
+          red = "#C01C28"; # red_4
+          green = "#26A269"; # green_5
+          yellow = "#E5A50A"; # yellow_5
+          blue = "#1C71D8"; # blue_4
+          magenta = "#813D9C"; # purple_4
+          cyan = "#218787"; # teal_5
+          white = "#B0AFAC"; # light_6
+        };
       };
     };
   };

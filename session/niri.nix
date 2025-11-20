@@ -64,6 +64,7 @@ in {
     prefer-no-csd = true;
     window-rules = [
       {
+        draw-border-with-background = false;
         clip-to-geometry = true;
         geometry-corner-radius = {
           bottom-left = 0.0;
