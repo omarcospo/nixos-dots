@@ -162,6 +162,7 @@
     xdg-desktop-portal-gtk
     xdg-desktop-portal-gnome
     nautilus
+    qbittorrent-enhanced
   ];
 
   environment = {
