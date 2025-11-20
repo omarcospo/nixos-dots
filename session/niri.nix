@@ -56,7 +56,6 @@ in {
   programs.niri.package = pkgs.niri;
   programs.niri.settings = {
     spawn-at-startup = [
-      {sh = "nohup dms restart > /dev/null 2>&1 &";}
       {sh = "nohup wl-paste --watch cliphist store > /dev/null 2>&1 &";}
       {sh = "nohup firefox > /dev/null 2>&1 &";}
     ];
@@ -140,11 +139,10 @@ in {
       "Mod+WheelScrollLeft".action.focus-column-left = {};
       # --------------------------------
       "Mod+G".action.toggle-overview = {};
-      "Mod+E".action.spawn = ["dms" "ipc" "call" "spotlight" "toggle"];
-      "Mod+Ctrl+R".action.spawn = ["nohup" "dms" "restart" ">" "/dev/null" "2>&1" "&"];
+      "Mod+E".action.spawn = ["noctalia-shell" "ipc" "call" "launcher" "toggle"];
+      "Mod+Escape".action.spawn = ["noctalia-shell" "ipc" "call" "lockScreen" "lock"];
       "Mod+T".action.spawn = "alacritty";
       "Mod+Return".action.spawn = "firefox";
-      "Mod+Escape".action.spawn = ["dms" "ipc" "call" "lock" "lock"];
       "Mod+Ctrl+Escape".action.quit = {};
       # --------------------------------
       "XF86AudioRaiseVolume" = {
