@@ -165,7 +165,4 @@ in {
   };
 
   programs.dankMaterialShell.enable = true;
-  home.packages = with pkgs; [
-    blueman
-  ];
 }
