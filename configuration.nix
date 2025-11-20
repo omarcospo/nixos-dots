@@ -140,6 +140,7 @@
     uv
     pkgconf
     libpkgconf
+    ffmpeg
     # languages
     python314
     dotnet-sdk_9
