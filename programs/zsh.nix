@@ -76,7 +76,7 @@ in {
           cd() {
             __zoxide_z "$@" && command eza -lah --color always
           }
-
+          export PATH="/home/nix/go/bin:$PATH"
     '';
 
     sessionVariables = {

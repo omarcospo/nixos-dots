@@ -25,6 +25,8 @@
       lua-language-server
       # Markdown
       marksman
+      # WEB
+      prettier
       # AI
       github-copilot-cli
       copilot-language-server

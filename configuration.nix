@@ -129,7 +129,9 @@
   programs.niri.enable = true;
 
   environment.systemPackages = with pkgs; [
-    # build
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-gnome
+    # build/dependencies
     gnumake
     ninja
     gcc
@@ -141,33 +143,35 @@
     pkgconf
     libpkgconf
     ffmpeg
-    # languages
-    python314
-    dotnet-sdk_9
-    #
-    git
-    neovim
+    # cli tools
     wl-clipboard
     killall
-    fzf
     ripgrep
+    zoxide
+    fzf
+    git
+    eza
+    dua
     sd
     fd
-    eza
-    zoxide
-    dua
-    networkmanagerapplet
-    vdhcoapp
-    sqlitestudio
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-gnome
-    nautilus
+    # languages
+    python314
+    go
+    gopls
+    # gui
     qbittorrent-enhanced
+    sqlitestudio
+    nautilus
+    vdhcoapp
+    neovim
   ];
 
   environment = {
-    shellInit = ''export PATH="${pkgs.cmake}/bin:${pkgs.libpkgconf}/bin:${pkgs.pkgconf}/bin:${pkgs.gcc}/bin:${pkgs.libffi}/bin:$PATH"'';
-    sessionVariables = {LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib pkgs.nodejs pkgs.libtool];};
+    shellInit = ''export PATH="${pkgs.fontconfig}/bin:${pkgs.cmake}/bin:${pkgs.libpkgconf}/bin:${pkgs.pkgconf}/bin:${pkgs.gcc}/bin:${pkgs.libffi}/bin:$PATH"'';
+    sessionVariables = {
+      PATH = ["$HOME/go/bin"];
+      LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib pkgs.nodejs pkgs.libtool pkgs.fontconfig];
+    };
   };
 
   fonts = {
