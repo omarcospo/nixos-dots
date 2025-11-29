@@ -171,7 +171,20 @@
   };
 
   # ===== NIX CONFIGURATION =====
-  nix = {settings.experimental-features = ["nix-command" "flakes"];};
+  nix = {
+    settings.experimental-features = ["nix-command" "flakes"];
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      interval = {
+        Weekday = 0;
+        Hour = 2;
+        Minute = 0;
+      };
+      options = "--delete-older-than 1d";
+    };
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   # ===== ENVIRONMENT =====
@@ -225,6 +238,8 @@
       neovim
       mangohud
       bottles
+      gparted
+      baobab
     ];
 
     shellInit = ''export PATH="${pkgs.fontconfig}/bin:${pkgs.cmake}/bin:${pkgs.libpkgconf}/bin:${pkgs.pkgconf}/bin:${pkgs.gcc}/bin:${pkgs.libffi}/bin:$PATH" '';
