@@ -4,176 +4,237 @@
   lib,
   ...
 }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [./hardware-configuration.nix];
 
   system.stateVersion = "25.05";
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  console.keyMap = "br-abnt2";
-  time.timeZone = "America/Sao_Paulo";
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "pt_BR.UTF-8";
-    LC_IDENTIFICATION = "pt_BR.UTF-8";
-    LC_MEASUREMENT = "pt_BR.UTF-8";
-    LC_MONETARY = "pt_BR.UTF-8";
-    LC_NAME = "pt_BR.UTF-8";
-    LC_NUMERIC = "pt_BR.UTF-8";
-    LC_PAPER = "pt_BR.UTF-8";
-    LC_TELEPHONE = "pt_BR.UTF-8";
-    LC_TIME = "pt_BR.UTF-8";
-  };
+  # ===== BOOT CONFIGURATION =====
 
-  boot.kernelParams = [
-    "transparent_hugepage=always" # Better memory management
-  ];
-
-  boot.kernel.sysctl = {
-    "fs.inotify.max_user_watches" = 524288;
-    "fs.inotify.max_user_instances" = 512;
-  };
-
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      charger = {
-        energy_performance_preference = "performance";
-        governor = "performance";
-        scaling_min_freq = 800000;
-        scaling_max_freq = 2700000;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPatches = let
+      borePatches = pkgs.fetchFromGitHub {
+        owner = "firelzrd";
+        repo = "bore-scheduler";
+        rev = "main";
+        sha256 = "svIpCsJ0+IKJorVUoJIT02sGjbUwdXk4kUQztfmGb4Q=";
       };
+    in
+      if builtins.pathExists "${borePatches}/patches/testing/linux-${lib.versions.majorMinor config.boot.kernelPackages.kernel.version}-bore"
+      then import "${borePatches}/patches/testing/linux-${lib.versions.majorMinor config.boot.kernelPackages.kernel.version}-bore"
+      else [];
+    kernelParams = ["transparent_hugepage=always" "amd_pstate=guided"];
+    kernel.sysctl = {
+      "fs.inotify.max_user_watches" = 524288;
+      "fs.inotify.max_user_instances" = 512;
     };
   };
 
-  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [intel-media-driver intel-vaapi-driver];
+  # ===== HARDWARE CONFIGURATION =====
+
+  hardware = {
+    firmware = [pkgs.linux-firmware];
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    enableRedistributableFirmware = true;
+    graphics.enable = true;
+    graphics.enable32Bit = true;
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
   };
 
+  services.fstrim.enable = true;
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 30;
+  };
+
+  # ===== NETWORKING =====
+  networking = {
+    networkmanager.enable = true;
+    firewall = {
+      enable = false;
+      allowedTCPPortRanges.to = 1714;
+      allowedTCPPortRanges.from = 1764;
+      allowedUDPPortRanges.to = 1714;
+      allowedUDPPortRanges.from = 1764;
+    };
+  };
+
+  # ===== AUDIO =====
+  services.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
+  };
+
+  # ===== LOCALIZATION =====
+  services.timesyncd.enable = false;
+  services.chrony = {
+    enable = true;
+    extraConfig = ''
+      server 10.0.0.53 minpoll -7 maxpoll 0 filter 31 polltarget 30 iburst burst maxdelay 0.002 maxdelayquant 0.1 xleave extfield F323
+      hwtimestamp *
+    '';
+  };
+  time.timeZone = "America/Sao_Paulo";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "pt_BR.UTF-8";
+      LC_IDENTIFICATION = "pt_BR.UTF-8";
+      LC_MEASUREMENT = "pt_BR.UTF-8";
+      LC_MONETARY = "pt_BR.UTF-8";
+      LC_NAME = "pt_BR.UTF-8";
+      LC_NUMERIC = "pt_BR.UTF-8";
+      LC_PAPER = "pt_BR.UTF-8";
+      LC_TELEPHONE = "pt_BR.UTF-8";
+      LC_TIME = "pt_BR.UTF-8";
+    };
+  };
+
+  console.keyMap = "br-abnt2";
   services.xserver.xkb = {
     layout = "br";
     variant = "";
   };
 
+  # ===== USER CONFIGURATION =====
   users.users.nix = {
     isNormalUser = true;
     description = "nix";
     extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.zsh;
   };
 
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  networking.networkmanager.enable = true;
-  programs.kdeconnect.enable = true;
-  networking.firewall = {
-    enable = false;
-    # KDE Connect
-    allowedTCPPortRanges.to = 1714;
-    allowedTCPPortRanges.from = 1764;
-    allowedUDPPortRanges.to = 1714;
-    allowedUDPPortRanges.from = 1764;
+  # ===== DESKTOP & DISPLAY =====
+  services.displayManager = {
+    gdm.enable = true;
+    sessionPackages = [pkgs.niri];
   };
-  # USB Connection
-  services.gvfs.enable = true;
-  programs.adb.enable = true;
-  services.udisks2.enable = true;
-  # Audio
-  services.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+    pam.services.gdm.enableGnomeKeyring = true;
   };
-  #
-  services.displayManager.gdm.enable = true;
-  services.displayManager.sessionPackages = [pkgs.niri];
-  security.polkit.enable = true;
+
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.gdm.enableGnomeKeyring = true;
-  programs.dconf.enable = true;
+
+  # ===== PROGRAMS & SERVICES =====
+  programs = {
+    zsh.enable = true;
+    kdeconnect.enable = true;
+    firefox.enable = true;
+    niri.enable = true;
+    nix-ld.enable = true;
+    dconf.enable = true;
+    gamemode.enable = true;
+  };
+
+  services = {
+    printing.enable = true;
+    printing.drivers = [pkgs.hplip];
+    gvfs.enable = true;
+    udisks2.enable = true;
+    syncthing = {
+      enable = true;
+      user = "nix";
+      group = "wheel";
+      dataDir = "/home/nix/Documents";
+      configDir = "/home/nix/.config/syncthing";
+    };
+  };
+
+  programs.adb.enable = true;
+
+  # ===== QT/THEMING =====
   qt = {
     enable = true;
     platformTheme = "qt5ct";
     style = "kvantum";
   };
 
-  programs.firefox.enable = true;
-  services.printing.enable = true;
-  security.rtkit.enable = true;
+  # ===== PORTALS =====
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [xdg-desktop-portal-gtk xdg-desktop-portal-wlr];
     configPackages = with pkgs; [xdg-desktop-portal-gtk xdg-desktop-portal-wlr];
   };
-  services = {
-    syncthing = {
-      enable = true;
-      group = "wheel";
-      user = "nix";
-      dataDir = "/home/nix/Documents";
-      configDir = "/home/nix/.config/syncthing";
-    };
-  };
 
+  # ===== NIX CONFIGURATION =====
+  nix = {settings.experimental-features = ["nix-command" "flakes"];};
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  programs.nix-ld.enable = true;
-
-  programs.niri.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-gnome
-    # build/dependencies
-    gnumake
-    ninja
-    gcc
-    binutils
-    nodejs
-    gcc
-    bun
-    uv
-    pkgconf
-    libpkgconf
-    ffmpeg
-    # cli tools
-    wl-clipboard
-    killall
-    ripgrep
-    zoxide
-    fzf
-    git
-    eza
-    dua
-    sd
-    fd
-    # languages
-    python314
-    go
-    gopls
-    # gui
-    qbittorrent-enhanced
-    sqlitestudio
-    nautilus
-    vdhcoapp
-    neovim
-  ];
-
+  # ===== ENVIRONMENT =====
   environment = {
-    shellInit = ''export PATH="${pkgs.fontconfig}/bin:${pkgs.cmake}/bin:${pkgs.libpkgconf}/bin:${pkgs.pkgconf}/bin:${pkgs.gcc}/bin:${pkgs.libffi}/bin:$PATH"'';
+    systemPackages = with pkgs; [
+      # Desktop portals
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+
+      # Build tools & dependencies
+      gnumake
+      ninja
+      gcc
+      binutils
+      pkgconf
+      libpkgconf
+      cmake
+
+      # Development
+      nodejs
+      bun
+      uv
+      python314
+      go
+      gopls
+      ffmpeg
+      libtool
+      libffi
+
+      # CLI tools
+      wl-clipboard
+      killall
+      ripgrep
+      zoxide
+      fzf
+      git
+      eza
+      dua
+      sd
+      fd
+      aria2
+      amdctl
+      ddcutil
+      cliphist
+
+      # GUI applications
+      qbittorrent-enhanced
+      sqlitestudio
+      nautilus
+      vdhcoapp
+      neovim
+      mangohud
+      bottles
+    ];
+
+    shellInit = ''export PATH="${pkgs.fontconfig}/bin:${pkgs.cmake}/bin:${pkgs.libpkgconf}/bin:${pkgs.pkgconf}/bin:${pkgs.gcc}/bin:${pkgs.libffi}/bin:$PATH" '';
     sessionVariables = {
       PATH = ["$HOME/go/bin"];
       LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib pkgs.nodejs pkgs.libtool pkgs.fontconfig];
     };
   };
 
+  # ===== FONTS =====
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -184,6 +245,8 @@
       noto-fonts-monochrome-emoji
       noto-fonts-color-emoji
       open-dyslexic
+      poppins
+      inter
     ];
     fontconfig = {
       enable = true;
