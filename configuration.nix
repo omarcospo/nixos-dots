@@ -53,7 +53,12 @@
 
   # ===== NETWORKING =====
   networking = {
-    networkmanager.enable = true;
+    nameservers = ["1.1.1.1" "8.8.8.8"];
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+    };
+    wireless.enable = false;
     firewall = {
       enable = false;
       allowedTCPPortRanges.to = 1714;
@@ -62,6 +67,9 @@
       allowedUDPPortRanges.from = 1764;
     };
   };
+
+  services.resolved.enable = true;
+  powerManagement.enable = true;
 
   # ===== AUDIO =====
   services.pulseaudio.enable = false;
@@ -231,6 +239,7 @@
       amdctl
       ddcutil
       cliphist
+      speedtest-cli
 
       # GUI applications
       qbittorrent-enhanced
