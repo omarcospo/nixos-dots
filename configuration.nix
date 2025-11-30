@@ -15,22 +15,20 @@
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelPatches = let
-      borePatches = pkgs.fetchFromGitHub {
-        owner = "firelzrd";
-        repo = "bore-scheduler";
-        rev = "main";
-        sha256 = "svIpCsJ0+IKJorVUoJIT02sGjbUwdXk4kUQztfmGb4Q=";
-      };
-    in
-      if builtins.pathExists "${borePatches}/patches/testing/linux-${lib.versions.majorMinor config.boot.kernelPackages.kernel.version}-bore"
-      then import "${borePatches}/patches/testing/linux-${lib.versions.majorMinor config.boot.kernelPackages.kernel.version}-bore"
-      else [];
-    kernelParams = ["transparent_hugepage=always" "amd_pstate=guided"];
+    kernelParams = [
+      "quiet"
+      "loglevel=3"
+      "udev.log_level=3"
+      "systemd.show_status=auto"
+      "transparent_hugepage=always"
+      "amd_pstate=guided"
+    ];
     kernel.sysctl = {
       "fs.inotify.max_user_watches" = 524288;
       "fs.inotify.max_user_instances" = 512;
     };
+    consoleLogLevel = 3;
+    initrd.verbose = false;
   };
 
   # ===== HARDWARE CONFIGURATION =====
