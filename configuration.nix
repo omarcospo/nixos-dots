@@ -128,7 +128,11 @@
   };
 
   services.gnome.gnome-keyring.enable = true;
-
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
   # ===== PROGRAMS & SERVICES =====
   programs = {
     zsh.enable = true;
