@@ -115,6 +115,7 @@ in {
       "Mod+Shift+R".action.reset-window-height = {};
       "Mod+F".action.maximize-column = {};
       "Mod+Shift+F".action.fullscreen-window = {};
+      "Mod+Ctrl+F".action.toggle-windowed-fullscreen = {};
       "Mod+Q".action.close-window = {};
       "Mod+C".action.center-column = {};
       "Mod+A".action.focus-column-left = {};
