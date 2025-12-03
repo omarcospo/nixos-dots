@@ -58,7 +58,6 @@
       enable = true;
       wifi.powersave = false;
     };
-    wireless.enable = false;
     firewall = {
       enable = false;
       allowedTCPPortRanges.to = 1714;
