@@ -54,6 +54,10 @@
   # ===== NETWORKING =====
   networking = {
     nameservers = ["1.1.1.1" "8.8.8.8"];
+    stevenblack = {
+      enable = true;
+      block = ["fakenews" "gambling" "porn" "social"];
+    };
     networkmanager = {
       enable = true;
       wifi.powersave = false;
@@ -66,7 +70,6 @@
       allowedUDPPortRanges.from = 1764;
     };
   };
-
   services.resolved.enable = true;
   powerManagement.enable = true;
 
