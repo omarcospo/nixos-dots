@@ -250,6 +250,7 @@
       baobab
       qalculate-gtk
       vesktop
+      ocenaudio
     ];
 
     shellInit = ''export PATH="${pkgs.fontconfig}/bin:${pkgs.cmake}/bin:${pkgs.libpkgconf}/bin:${pkgs.pkgconf}/bin:${pkgs.gcc}/bin:${pkgs.libffi}/bin:$PATH" '';
