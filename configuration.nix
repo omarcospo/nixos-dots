@@ -40,7 +40,6 @@
     graphics.enable = true;
     graphics.enable32Bit = true;
     bluetooth.enable = true;
-    bluetooth.powerOnBoot = true;
   };
 
   services.fstrim.enable = true;
@@ -74,15 +73,7 @@
   powerManagement.enable = true;
 
   # ===== AUDIO =====
-  services.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse.enable = true;
-  };
+  services.pipewire.enable = true;
 
   # ===== LOCALIZATION =====
   services.timesyncd.enable = false;
@@ -251,6 +242,7 @@
       qalculate-gtk
       vesktop
       ocenaudio
+      pwvucontrol
     ];
 
     shellInit = ''export PATH="${pkgs.fontconfig}/bin:${pkgs.cmake}/bin:${pkgs.libpkgconf}/bin:${pkgs.pkgconf}/bin:${pkgs.gcc}/bin:${pkgs.libffi}/bin:$PATH" '';
