@@ -55,12 +55,9 @@
     nameservers = ["1.1.1.1" "8.8.8.8"];
     stevenblack = {
       enable = true;
-      block = ["fakenews" "gambling" "porn" "social"];
+      block = ["fakenews" "gambling" "porn"];
     };
-    networkmanager = {
-      enable = true;
-      wifi.powersave = false;
-    };
+    networkmanager.enable = true;
     firewall = {
       enable = false;
       allowedTCPPortRanges.to = 1714;
@@ -69,8 +66,6 @@
       allowedUDPPortRanges.from = 1764;
     };
   };
-  services.resolved.enable = true;
-  powerManagement.enable = true;
 
   # ===== AUDIO =====
   services.pipewire.enable = true;
@@ -79,10 +74,7 @@
   services.timesyncd.enable = false;
   services.chrony = {
     enable = true;
-    extraConfig = ''
-      server 10.0.0.53 minpoll -7 maxpoll 0 filter 31 polltarget 30 iburst burst maxdelay 0.002 maxdelayquant 0.1 xleave extfield F323
-      hwtimestamp *
-    '';
+    servers = ["time.cloudflare.com"];
   };
   time.timeZone = "America/Sao_Paulo";
   i18n = {
@@ -132,6 +124,7 @@
     enable = true;
     enableSSHSupport = true;
   };
+
   # ===== PROGRAMS & SERVICES =====
   programs = {
     zsh.enable = true;
