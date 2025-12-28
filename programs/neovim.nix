@@ -8,11 +8,6 @@
     enable = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
-      # C#
-      roslyn
-      roslyn-ls
-      csharp-ls
-      csharpier
       # TYPST
       typst
       typstyle
