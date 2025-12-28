@@ -1,9 +1,12 @@
 {
-  description = "NixOS 25.05 configuration with Home Manager, Niri, and Neovim Nightly";
+  description = "NixOS 25.11 configuration with Home Manager, Niri, and Neovim Nightly";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {url = "github:nix-community/home-manager";};
+    nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay/21595d9f79b5da0eef177dcfdd84ca981ac253a9";
     niri-flake.url = "github:sodiboo/niri-flake";
     noctalia = {url = "github:noctalia-dev/noctalia-shell";};

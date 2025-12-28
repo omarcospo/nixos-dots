@@ -15,7 +15,7 @@
 in {
   home.username = "nix";
   home.homeDirectory = "/home/nix";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 
   imports =
