@@ -122,10 +122,6 @@ in {
       "Mod+J".action.focus-window-down = {};
       "Mod+K".action.focus-window-up = {};
       "Mod+D".action.focus-column-right = {};
-      "Mod+H".action.focus-monitor-left = {};
-      "Mod+L".action.focus-monitor-right = {};
-      "Mod+Ctrl+H".action.move-window-to-monitor-left = {};
-      "Mod+Ctrl+L".action.move-window-to-monitor-right = {};
       "Mod+Ctrl+A".action.move-column-left = {};
       "Mod+Ctrl+J".action.move-window-down = {};
       "Mod+Ctrl+K".action.move-window-up = {};
