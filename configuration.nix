@@ -221,6 +221,7 @@
       ddcutil
       cliphist
       speedtest-cli
+      jq
 
       # GUI applications
       qbittorrent-enhanced

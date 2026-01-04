@@ -27,7 +27,6 @@
       copilot-language-server
       sqlite
       elinks
-      jq
     ];
   };
 }
