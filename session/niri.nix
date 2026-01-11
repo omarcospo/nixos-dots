@@ -123,6 +123,7 @@ in {
       "Mod+J".action.focus-window-down = {};
       "Mod+K".action.focus-window-up = {};
       "Mod+D".action.focus-column-right = {};
+      "Mod+V".action.toggle-window-floating = {};
       "Mod+Ctrl+A".action.move-column-left = {};
       "Mod+Ctrl+J".action.move-window-down = {};
       "Mod+Ctrl+K".action.move-window-up = {};
