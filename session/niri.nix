@@ -75,7 +75,7 @@ in {
       }
     ];
     layout = {
-      gaps = 13;
+      gaps = 10;
       background-color = "#222222";
       focus-ring.enable = false;
       border.enable = true;
