@@ -61,6 +61,7 @@ in {
     ];
     cursor = {theme = "Numix-Cursor";};
     prefer-no-csd = true;
+    xwayland-satellite.enable = false;
     window-rules = [
       {
         draw-border-with-background = false;
