@@ -13,20 +13,10 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+      timeout = 0;
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [
-      "quiet"
-      "loglevel=3"
-      "udev.log_level=3"
-      "systemd.show_status=auto"
-      "transparent_hugepage=always"
-      "amd_pstate=guided"
-    ];
-    kernel.sysctl = {
-      "fs.inotify.max_user_watches" = 524288;
-      "fs.inotify.max_user_instances" = 512;
-    };
+    kernelParams = ["quiet" "loglevel=0" "udev.log_level=0"];
     consoleLogLevel = 3;
     initrd.verbose = false;
   };
@@ -35,10 +25,6 @@
 
   hardware = {
     firmware = [pkgs.linux-firmware];
-    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    enableRedistributableFirmware = true;
-    graphics.enable = true;
-    graphics.enable32Bit = true;
     bluetooth.enable = true;
   };
 
