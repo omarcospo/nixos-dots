@@ -123,6 +123,10 @@
           use = ["edit" "open" "reveal"];
         }
         {
+          mime = "text/html";
+          use = ["open" "edit" "reveal"];
+        }
+        {
           mime = "text/*";
           use = ["edit" "reveal"];
         }
