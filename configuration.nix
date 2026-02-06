@@ -203,6 +203,7 @@
       ffmpeg
       libtool
       libffi
+      android-studio
 
       # CLI tools
       wl-clipboard
