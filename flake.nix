@@ -18,6 +18,7 @@
     pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      config.permittedInsecurePackages = ["qtwebengine-5.15.19"];
       overlays = [
       ];
     };
