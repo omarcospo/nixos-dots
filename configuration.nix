@@ -17,6 +17,8 @@
     };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = ["quiet" "loglevel=0" "udev.log_level=0"];
+    kernelModules = ["v4l2loopback"];
+    extraModulePackages = [pkgs.linuxPackages_latest.v4l2loopback];
     consoleLogLevel = 3;
     initrd.verbose = false;
   };
@@ -36,12 +38,20 @@
     memoryPercent = 30;
   };
 
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      droidcam-obs
+    ];
+  };
+
   # ===== NETWORKING =====
   networking = {
     nameservers = ["1.1.1.1" "8.8.8.8"];
     stevenblack = {
       enable = true;
-      block = ["fakenews" "gambling" "porn"];
+      block = ["fakenews" "gambling"];
     };
     networkmanager.enable = true;
     firewall = {
@@ -179,6 +189,10 @@
       pkgconf
       libpkgconf
       cmake
+      linuxPackages_latest.v4l2loopback
+      v4l-utils
+      android-tools
+      adb-sync
 
       # Development
       nodejs
@@ -224,6 +238,7 @@
       ocenaudio
       pwvucontrol
       megasync
+      droidcam
     ];
 
     shellInit = ''export PATH="${pkgs.fontconfig}/bin:${pkgs.cmake}/bin:${pkgs.libpkgconf}/bin:${pkgs.pkgconf}/bin:${pkgs.gcc}/bin:${pkgs.libffi}/bin:$PATH" '';
