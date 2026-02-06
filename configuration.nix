@@ -197,7 +197,6 @@
       # Development
       nodejs
       bun
-      uv
       python314
       go
       gopls
@@ -228,9 +227,6 @@
       sqlitestudio
       nautilus
       vdhcoapp
-      neovim
-      mangohud
-      bottles
       gparted
       baobab
       qalculate-gtk
