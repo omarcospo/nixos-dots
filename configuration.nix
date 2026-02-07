@@ -222,6 +222,8 @@
       cliphist
       speedtest-cli
       jq
+      sqlite
+      duckdb
 
       # GUI applications
       qbittorrent-enhanced

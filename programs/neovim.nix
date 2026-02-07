@@ -25,7 +25,6 @@
       # AI
       github-copilot-cli
       copilot-language-server
-      sqlite
       elinks
     ];
   };
