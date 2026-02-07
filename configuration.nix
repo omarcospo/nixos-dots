@@ -28,6 +28,7 @@
   hardware = {
     firmware = [pkgs.linux-firmware];
     bluetooth.enable = true;
+    graphics.extraPackages = [pkgs.amf];
   };
 
   services.fstrim.enable = true;
@@ -42,6 +43,7 @@
     enable = true;
     enableVirtualCamera = true;
     plugins = with pkgs.obs-studio-plugins; [
+      obs-vkcapture
       droidcam-obs
     ];
   };
@@ -200,7 +202,7 @@
       python314
       go
       gopls
-      ffmpeg
+      ffmpeg-full
       libtool
       libffi
       android-studio
