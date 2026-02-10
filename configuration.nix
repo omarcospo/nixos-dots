@@ -24,6 +24,18 @@
   };
 
   # ===== HARDWARE CONFIGURATION =====
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      charger = {
+        governor = "schedutil";
+        turbo = "auto";
+        scaling_max_freq = 3000000; # 3.0 GHz
+      };
+    };
+  };
+
+  services.thermald.enable = true;
 
   hardware = {
     firmware = [pkgs.linux-firmware];
