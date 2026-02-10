@@ -65,7 +65,7 @@
     nameservers = ["1.1.1.1" "8.8.8.8"];
     stevenblack = {
       enable = true;
-      block = ["fakenews" "gambling"];
+      block = ["fakenews" "gambling" "porn"];
     };
     networkmanager.enable = true;
     firewall = {
