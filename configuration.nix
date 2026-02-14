@@ -15,10 +15,9 @@
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
     kernelParams = ["quiet" "loglevel=0" "udev.log_level=0"];
     kernelModules = ["v4l2loopback"];
-    extraModulePackages = [pkgs.linuxPackages_latest.v4l2loopback];
     consoleLogLevel = 3;
     initrd.verbose = false;
   };
