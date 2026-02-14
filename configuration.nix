@@ -238,6 +238,8 @@
       jq
       sqlite
       duckdb
+      opencode
+      lsof
 
       # GUI applications
       qbittorrent-enhanced
